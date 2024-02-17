@@ -1,2 +1,9 @@
-﻿  Main.cpp
-  OGL_Project1.vcxproj -> D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\x64\Debug\OGL_Project1.exe
+﻿  EBO.cpp
+  Main.cpp
+  ShaderClass.cpp
+  VAO.cpp
+D:\11Code\C++\OpenGL\TrainOpenGL\Triangle\VAO.cpp(15,63): warning C4244: 'argument': conversion from 'GLsizeiptr' to 'GLsizei', possible loss of data
+  VBO.cpp
+  Generating Code...
+  glad.c
+  OGL_Project1.vcxproj -> D:\11Code\C++\OpenGL\TrainOpenGL\Triangle\x64\Debug\OGL_Project1.exe
