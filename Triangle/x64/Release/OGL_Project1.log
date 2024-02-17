@@ -1,0 +1,10 @@
+﻿  EBO.cpp
+D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\EBO.h(4,9): fatal error C1083: Cannot open include file: 'glad/glad.h': No such file or directory
+  Main.cpp
+D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\Main.cpp(2,9): fatal error C1083: Cannot open include file: 'glad/glad.h': No such file or directory
+  ShaderClass.cpp
+D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\shaderClass.h(5,9): fatal error C1083: Cannot open include file: 'glad/glad.h': No such file or directory
+  VAO.cpp
+D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\VAO.h(4,9): fatal error C1083: Cannot open include file: 'glad/glad.h': No such file or directory
+  VBO.cpp
+D:\11Code\C++\OpenGL\OpenGl_Project1\TriangleOGL\VBO.h(5,9): fatal error C1083: Cannot open include file: 'glad/glad.h': No such file or directory

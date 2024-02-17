@@ -23,9 +23,9 @@
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="3" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2c0gWM2TBQiT7EfJJACuMpWd34c" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -41,7 +41,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/11Code/C++/OpenGL/OpenGl_Project1/OGL_Project1/Main.cpp",
+    "last_opened_file_path": "D:/11Code/C++/OpenGL/OpenGl_Project1/TriangleOGL",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,6 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707253941350</updated>
       <workItem from="1707253946838" duration="736000" />
+      <workItem from="1708184127268" duration="30000" />
     </task>
     <servers />
   </component>
