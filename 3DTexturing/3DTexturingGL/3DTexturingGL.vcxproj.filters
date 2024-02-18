@@ -76,4 +76,9 @@
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="FreeChef.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

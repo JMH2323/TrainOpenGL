@@ -1,2 +1,4 @@
 ﻿  Main.cpp
+D:\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+D:\11Code\C++\OpenGL\TrainOpenGL\3DTexturing\3DTexturingGL\Libraries\include\glad\glad.h(32): message : see previous definition of 'APIENTRY'
   3DTexturingGL.vcxproj -> D:\11Code\C++\OpenGL\TrainOpenGL\3DTexturing\3DTexturingGL\x64\Debug\3DTexturingGL.exe

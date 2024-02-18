@@ -16,6 +16,13 @@
 #include"Texture.h"
 
 
+// Includes for enabling music
+#include<Windows.h>
+#include<mmsystem.h>
+#include<string>
+#pragma comment(lib, "winmm.lib")
+
+
 
 
 // Vertices coordinates       // Vertices Colors          // Texture Coordinates
@@ -118,6 +125,8 @@ int main()
 	// Enables the Depth Buffer
 	glEnable(GL_DEPTH_TEST);
 
+	PlaySound(TEXT("FreeChef.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
 
 	////// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -182,6 +191,8 @@ int main()
 	EBO1.Delete();
 	ChefCat.Delete();
 	shaderProgram.Delete();
+
+	PlaySound(0, 0, 0);
 
 	// Delete window and stop GLFW before ending program.
 	glfwDestroyWindow(window);
