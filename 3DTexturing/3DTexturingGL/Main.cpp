@@ -4,6 +4,9 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include<stb/stb_image.h>
+#include<glm/glm.hpp>
+#include<glm/gtc/matrix_transform.hpp>
+#include<glm/gtc/type_ptr.hpp>
 
 
 #include"shaderClass.h"
@@ -15,21 +18,28 @@
 
 
 
-////// Vertices coordinates		 // Vertices Colors		// Texture Coordinates
+// Vertices coordinates       // Vertices Colors          // Texture Coordinates
 GLfloat vertices[] =
 {
-	-0.5f, -0.5f, 0.0f,			 1.0f, 0.0f, 0.0f,		0.0f, 0.0f, // Lower left corner
-	-0.5f,  0.5f, 0.0f,			 0.0f, 1.0f, 0.0f,		0.0f, 1.0f, // Upper left corner
-	 0.5f,  0.5f, 0.0f,			 0.0f, 0.0f, 1.0f,		1.0f, 1.0f, // Upper right corner
-	 0.5f, -0.5f, 0.0f,			 1.0f, 1.0f, 1.0f,		1.0f, 0.0f  // Lower right corner
+	-0.5f, 0.0f,  0.5f,         0.83f, 0.70f, 0.44f,    0.15f, 0.0f, // Forward Left Corner
+	-0.5f, 0.0f, -0.5f,         0.83f, 0.70f, 0.44f,    1.0f, 0.0f, // Forward Right Corner
+	 0.5f, 0.0f, -0.5f,         0.83f, 0.70f, 0.44f,    0.25f, 0.0f, // ForeGround Right Corner
+	 0.5f, 0.0f,  0.5f,         0.83f, 0.70f, 0.44f,    1.0f, 0.0f, // ForeGround Left Corner
+	 0.0f, 0.8f,  0.0f,         0.92f, 0.86f, 0.76f,    0.5f,  1.0f  // Top
 };
 
-// Indices for vertice generation order
+// Indices for vertex generation order
 GLuint indices[] =
 {
-	0, 2, 1, // Upper triangle
-	0, 3, 2 // Lower triangle
+	0, 1, 2,
+	0, 2, 3,
+	0, 1, 4,
+	1, 2, 4,
+	2, 3, 4,
+	3, 0, 4
 };
+
+
 
 
 
@@ -97,8 +107,17 @@ int main()
 
 	////// Texture
 
-	Texture ChefCat("Chef.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture ChefCat("Chef.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	ChefCat.texUnit(shaderProgram, "tex0", 0);
+
+
+	// Model values
+	float rotation = 0.0f;
+	double prevTime = glfwGetTime();
+
+	// Enables the Depth Buffer
+	glEnable(GL_DEPTH_TEST);
+
 
 	////// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -106,9 +125,41 @@ int main()
 		// Specify background color
 		glClearColor(0.20f, 0.09f, 0.07f, 1.0f);
 		// Clean back buffer and assign new color
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader to use
 		shaderProgram.Activate();
+
+		// Rotate the model in its 3D glory
+		double crntTime = glfwGetTime();
+		if (crntTime - prevTime >= 1 / 60)
+		{
+			rotation += 0.5f;
+			prevTime = crntTime;
+		}
+
+
+		// Initialize Matrices
+		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat4 view = glm::mat4(1.0f);
+		glm::mat4 proj = glm::mat4(1.0f);
+
+
+		
+		
+
+		// Apply transformations to matrices
+		model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(0.0f, -0.5f, -2.0f));
+		// Clipping objects too close or too far
+		proj = glm::perspective(glm::radians(45.0f), (float)(800/800), 0.01f, 100.0f);
+
+		int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		int viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		int projLoc = glGetUniformLocation(shaderProgram.ID, "proj");
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+
 		// Assign a value to the uniform
 		glUniform1f(uniID, 0.5f);
 		// Bind Texture Object
@@ -116,7 +167,7 @@ int main()
 		// Bind VAO so GL knows to use it
 		VAO1.Bind();
 		// Draw the Triangle using TRIANGLES Primitive
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
 		// Swap Front-Back Buffers
 		glfwSwapBuffers(window);
 
